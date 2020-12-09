@@ -74,20 +74,16 @@ class DelItemDialog(QDialog):
         self.extra.setReadOnly(True)
         self.ok_btn.clicked.connect(self.ok)
         self.cancel_btn.clicked.connect(self.cancel)
-        self.name.setText(name)
+        self.name.setText(str(name))
         self.num.setText(str(number))
         self.extra.setPlainText(extra)
 
     def cancel(self):
-        self.close_function(False)
         self.close()
 
     def ok(self):
-        error = self.close_function(True)
-        if not error:
-            self.close()
-        else:
-            self.warning.setText(error)
+        self.close_function(True)
+        self.close()
 
   
 class DataBase:
@@ -324,7 +320,6 @@ class MainWindow(AbstractDatabaseWidget):
         # Метод для Удалить Инвентарь -> Удалить
         if delete:
             self.exec(f'DELETE from items WHERE id = {self.item_id}')
-            self.del_item_id()
             self.table_now()
         self.del_item_id()
 
