@@ -82,7 +82,7 @@ class DelItemDialog(QDialog):
         self.close()
 
     def ok(self):
-        self.close_function(True)
+        self.close_function()
         self.close()
 
   
@@ -316,11 +316,10 @@ class MainWindow(AbstractDatabaseWidget):
             dialog = DelItemDialog(self.del_inventory_db, name, num, extra)
             dialog.exec()
 
-    def del_inventory_db(self, delete):
+    def del_inventory_db(self):
         # Метод для Удалить Инвентарь -> Удалить
-        if delete:
-            self.exec(f'DELETE from items WHERE id = {self.item_id}')
-            self.table_now()
+        self.exec(f'DELETE from items WHERE id = {self.item_id}')
+        self.table_now()
         self.del_item_id()
 
     def add_inventory(self):
